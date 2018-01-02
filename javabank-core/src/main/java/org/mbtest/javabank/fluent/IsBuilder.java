@@ -1,5 +1,6 @@
 package org.mbtest.javabank.fluent;
 
+import org.json.simple.JSONObject;
 import org.mbtest.javabank.http.responses.Is;
 
 import java.io.File;
@@ -14,6 +15,7 @@ public class IsBuilder extends ResponseTypeBuilder {
     private String body = "";
     private String mode;
     private File bodyFile;
+    private JSONObject jsonBody;
     private final HashMap<String, String> headers = newHashMap();
 
     public IsBuilder(ResponseBuilder responseBuilder) {
@@ -40,6 +42,12 @@ public class IsBuilder extends ResponseTypeBuilder {
         return this;
     }
 
+    public IsBuilder body(JSONObject body) {
+        this.jsonBody = body;
+        return this;
+    }
+
+
     public IsBuilder mode(String mode){
         this.mode = mode;
         return this;
@@ -55,6 +63,14 @@ public class IsBuilder extends ResponseTypeBuilder {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        if(jsonBody != null) {
+            return new Is()
+                    .withStatusCode(statusCode)
+                    .withHeaders(headers)
+                    .withBody(jsonBody)
+                    .withMode(mode);
         }
 
         return new Is()
