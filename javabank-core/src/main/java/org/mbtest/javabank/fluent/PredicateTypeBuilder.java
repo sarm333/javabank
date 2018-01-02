@@ -43,6 +43,18 @@ public class PredicateTypeBuilder implements FluentBuilder {
         return getHttpMatcherBuilder(PredicateType.EXISTS);
     }
 
+    public PredicateValueBuilder and() {
+        return getHttpMatcherBuilder(PredicateType.AND);
+    }
+
+    public PredicateValueBuilder or() {
+        return getHttpMatcherBuilder(PredicateType.OR);
+    }
+
+    public PredicateValueBuilder not() {
+        return getHttpMatcherBuilder(PredicateType.NOT);
+    }
+
     private PredicateValueBuilder getHttpMatcherBuilder(PredicateType type) {
         PredicateValueBuilder predicateValueBuilder = new PredicateValueBuilder(this, type);
         childPredicateValueBuilders.add(predicateValueBuilder);

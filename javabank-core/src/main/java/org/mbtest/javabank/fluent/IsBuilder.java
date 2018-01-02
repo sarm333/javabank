@@ -47,7 +47,6 @@ public class IsBuilder extends ResponseTypeBuilder {
         return this;
     }
 
-
     public IsBuilder mode(String mode){
         this.mode = mode;
         return this;
